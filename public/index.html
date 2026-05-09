@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Zuzu Web Console</title>
+	<style>
+		:root {
+			color-scheme: dark;
+			font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+		}
+
+		body {
+			margin: 0;
+			padding: 0;
+			background: #0f131a;
+			color: #d9dde7;
+		}
+
+		main {
+			margin: 0 auto;
+		}
+
+		h1 {
+			margin: 0 0 1rem;
+			font-size: 1.35rem;
+		}
+
+		.console {
+			border: 1px solid #2f3642;
+			overflow: hidden;
+			background: #1f2430;
+		}
+
+		.history {
+			height: calc(100vh - 6.1rem);
+			overflow: auto;
+			border-bottom: 1px solid #2f3642;
+		}
+
+		.entry {
+			margin: 0.25rem 0.5rem 0.5rem;
+			display: flex;
+		}
+
+		.prompt {
+			font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+			font-weight: 700;
+			margin-bottom: 0.1rem;
+			color: #8fd1ff;
+			padding-right: 0.67rem;
+		}
+		
+		.history .prompt {
+			flex-grow: 0;
+		}
+
+		.history pre.zuzu-highlight {
+			flex-grow: 5;
+			font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+			font-weight: 700;
+			margin: 0 0 0.1rem;
+			font-size: 1rem;
+		}
+
+		.prompt.cont {
+			color: #d4a1ff;
+		}
+
+		.output {
+			font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+			white-space: pre-wrap;
+			margin-bottom: 0.2rem;
+			color: #8ce99a;
+		}
+
+		.output.stdout {
+			color: #8b8b8b;
+		}
+
+		.output.stderr {
+			color: #ffe98b;
+		}
+
+		.output.error {
+			color: #ff8b8b;
+		}
+		
+		.prompt-wrap {
+			display: flex;
+		}
+		
+		#current-prompt {
+			flex-grow: 0;
+		}
+
+		.editor {
+			height: 5rem;
+			padding: 0.5rem;
+		}
+
+		.editor-wrap {
+			flex-grow: 5;
+			position: relative;
+			font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+			font-size: 15px;
+			line-height: 1.4;
+		}
+
+		#editor-highlight,
+		#editor-input {
+			box-sizing: border-box;
+			width: 100%;
+			height: 2rem;
+			margin: 0;
+			padding: 0.65rem 0.75rem;
+			border-radius: 8px;
+			border: none;
+			font-family: inherit !important;
+			font-size: inherit !important;
+		}
+
+		#editor-highlight {
+			pointer-events: none;
+			white-space: pre-wrap;
+			word-break: break-word;
+			position: relative;
+			top: -3px;
+		}
+
+		#editor-highlight code {
+			display: block;
+			white-space: pre-wrap;
+			word-break: break-word;
+		}
+
+		#editor-input {
+			position: absolute;
+			top: 0;
+			left: 0;
+			resize: vertical;
+			background: transparent;
+			color: transparent;
+			caret-color: #ffffff;
+			overflow: auto;
+		}
+
+		#editor-input:focus {
+			outline: 2px solid #607dff;
+			outline-offset: 1px;
+		}
+
+		.controls {
+			display: flex;
+			gap: 0.5rem;
+			margin-top: 0.6rem;
+		}
+
+		button {
+			border: 1px solid #3d495a;
+			background: #2b3340;
+			color: #eff2f8;
+			padding: 0.5rem 0.8rem;
+			border-radius: 8px;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background: #354154;
+		}
+
+		.note {
+			margin-top: 0.4rem;
+			font-size: 0.9rem;
+			opacity: 0.85;
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<div class="console">
+			<div id="history" class="history"></div>
+			<div class="editor">
+				<div class="prompt-wrap">
+					<div id="current-prompt" class="prompt">zuzu (^_^)&gt;</div>
+					<div class="editor-wrap">
+						<pre id="editor-highlight" class="zuzu-highlight"><code id="editor-highlight-code"></code></pre>
+						<input id="editor-input" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off">
+					</div>
+				</div>
+				<div class="controls">
+					<button id="run-btn" type="button">Run (Enter)</button>
+					<button id="reset-btn" type="button">Reset Session</button>
+				</div>
+			</div>
+		</div>
+	</main>
+	<script src="./zuzu-highlight.js"></script>
+	<script src="./app.js"></script>
+</body>
+</html>
