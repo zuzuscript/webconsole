@@ -1,0 +1,3 @@
+[submodule "public/zuzu-highlight-js"]
+	path = public/zuzu-highlight-js
+	url = git@github.com:zuzuscript/zuzu-highlight-js.git

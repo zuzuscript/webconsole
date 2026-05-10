@@ -23,5 +23,5 @@ Then open:
 
 - This is intentionally isolated under `extras/webconsole`.
 - No core runtime files are modified.
-- Syntax highlighting uses the existing `zuzu-highlight.js`
+- Syntax highlighting uses the existing `public/zuzu-highlight-js/zuzu-highlight.js`
   implementation copied from the site assets.
